@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover,user-scalable=no">
+<title>BARAMEEL RUN — Runner Traits</title>
+<style>
+:root{--teal:#082a35;--cream:#f6ead7;--orange:#ef4a25;--yellow:#f4bf35;--red:#b82b1e;--ink:#102832}
+*{box-sizing:border-box}html,body{margin:0;min-height:100%;background:var(--teal);font-family:Arial,sans-serif}
+body{color:var(--cream);padding:18px;overflow-x:hidden}
+.wrap{width:min(100%,560px);margin:auto}
+.top{display:flex;justify-content:space-between;align-items:center;margin-bottom:14px}
+.back{display:inline-flex;align-items:center;gap:8px;background:var(--red);color:white;text-decoration:none;border:3px solid var(--yellow);border-radius:14px;padding:10px 16px;font-weight:900;font-size:15px}
+.brand{font-weight:1000;font-style:italic;font-size:23px;letter-spacing:-1px}
+.card{background:#103b46;border:3px solid var(--yellow);border-radius:24px;padding:14px;box-shadow:0 7px 0 #051a21}
+.hero{display:grid;grid-template-columns:40% 60%;gap:12px;align-items:center}
+.portrait{width:100%;aspect-ratio:1/1.65;object-fit:cover;border-radius:18px;border:3px solid var(--cream);background:#173f49}
+h1{font-size:34px;line-height:.9;margin:0 0 8px;font-style:italic;color:var(--cream);text-shadow:3px 3px 0 #000}
+.tag{color:var(--yellow);font-weight:1000;font-size:14px;margin-bottom:10px}
+.desc{font-size:14px;line-height:1.35;margin:0}
+.section{margin-top:16px;background:#092c36;border:2px solid #d9c59e;border-radius:17px;padding:13px}
+.section h2{margin:0 0 10px;font-size:18px;color:var(--yellow)}
+.stat{display:grid;grid-template-columns:90px 1fr 28px;align-items:center;gap:8px;margin:9px 0;font-weight:900;font-size:13px}
+.bar{height:12px;background:#263e45;border-radius:10px;overflow:hidden;border:1px solid #1a2022}
+.fill{height:100%;background:var(--orange);border-radius:10px}
+.special{display:flex;gap:12px;align-items:center}
+.badge{width:58px;height:58px;flex:none;border-radius:50%;border:3px solid var(--yellow);display:grid;place-items:center;background:var(--red);font-size:25px}
+.special strong{display:block;color:var(--yellow);font-size:18px}
+.special span{font-size:13px;line-height:1.35}
+.note{margin-top:14px;text-align:center;font-size:12px;opacity:.8}
+</style></head><body>
+<div class="wrap">
+<div class="top"><a class="back" href="./screen03.html">← BACK</a><div class="brand">BARAMEEL RUN</div></div>
+<div class="card">
+<div class="hero">
+<img id="portrait" class="portrait" src="" alt="">
+<div><h1 id="name"></h1><div id="tag" class="tag"></div><p id="desc" class="desc"></p></div>
+</div>
+<div class="section"><h2>RUNNER TRAITS</h2>
+<div class="stat"><span>SPEED</span><div class="bar"><div id="speed" class="fill"></div></div><b id="speedN"></b></div>
+<div class="stat"><span>JUMP</span><div class="bar"><div id="jump" class="fill"></div></div><b id="jumpN"></b></div>
+<div class="stat"><span>COIN BOOST</span><div class="bar"><div id="coin" class="fill"></div></div><b id="coinN"></b></div>
+<div class="stat"><span>ENERGY</span><div class="bar"><div id="energy" class="fill"></div></div><b id="energyN"></b></div>
+</div>
+<div class="section special"><div class="badge">★</div><div><strong id="special"></strong><span id="effect"></span></div></div>
+<div class="note">Traits are the starting gameplay profile — they can be tuned later as the run system develops.</div>
+</div></div>
+<script>
+const runners={"rookie": {"name": "THE ROOKIE", "tag": "THE FRESH START", "desc": "Balanced and easy to learn. A dependable choice for your first run.", "energy": 5, "speed": 2, "jump": 2, "coin": 3, "special": "LUCKY START", "effect": "Starts each run with a short bonus to collected marks."}, "skater": {"name": "THE SKATER", "tag": "THE FLOW MASTER", "desc": "Built for movement. Great at jumps and keeping momentum.", "energy": 4, "speed": 4, "jump": 5, "coin": 2, "special": "FLOW MODE", "effect": "Successful jumps briefly improve movement speed."}, "brona": {"name": "BRONA", "tag": "VIBES LEAD THE WAY", "desc": "Fast, stylish, and always positive. Brona is built around collecting more.", "energy": 4, "speed": 4, "jump": 3, "coin": 5, "special": "MAGNET MOOD", "effect": "Attracts more coins for a short time."}, "racer": {"name": "THE RACER", "tag": "THE SPEED MACHINE", "desc": "Pure speed. Designed for players who want to push the pace.", "energy": 3, "speed": 5, "jump": 4, "coin": 2, "special": "TURBO RUSH", "effect": "Activates a short burst of extra running speed."}, "chiller": {"name": "THE CHILLER", "tag": "THE STEADY ONE", "desc": "Relaxed and resilient. Keeps going when the run gets long.", "energy": 5, "speed": 3, "jump": 2, "coin": 4, "special": "EASY VIBES", "effect": "Energy drains more slowly during the run."}, "dreamer": {"name": "THE DREAMER", "tag": "THE EXPLORER", "desc": "Curious and reward-focused. Made for discovering more along the route.", "energy": 4, "speed": 3, "jump": 3, "coin": 5, "special": "DISCOVERY BOOST", "effect": "Gets extra marks from newly discovered route spots."}};
+const key=new URLSearchParams(location.search).get('runner')||'brona';
+const r=runners[key]||runners.brona;
+document.title='BARAMEEL RUN — '+r.name;
+document.getElementById('portrait').src='./assets/'+key+'.png';
+document.getElementById('portrait').alt=r.name;
+for(const id of ['name','tag','desc','special','effect']) document.getElementById(id).textContent=r[id];
+for(const id of ['speed','jump','coin','energy']) {
+  const n=id==='coin'?r.coin:r[id];
+  document.getElementById(id).style.width=(n*20)+'%';
+  document.getElementById(id+'N').textContent=n+'/5';
+}
+</script></body></html>
