@@ -1,15 +1,18 @@
-BARAMEEL RUN — SCREEN 01 CLEAN MASTER
+BARAMEEL RUN — SCREEN 02 + SCREEN 03 CLEAN PACKAGE
 
-Approved clean visual direction:
-- Single BARAMEEL RUN title.
-- No separate BARAMEEL logo above the title.
-- No "A SMALLER CITY / A BIGGER STORY" header.
-- No extra right-side decorative slogan cluster.
-- Cleaned-up composition with fewer competing messages.
-- Portrait 9:16 artwork.
-- No phone mockup.
-- No rotate-your-phone blocking.
-- START YOUR RUN and HOW IT WORKS? are interactive.
+Upload these files together into:
+barameel-run/
 
-GitHub Pages target:
-https://midous007-hue.github.io/barameel2/barameel-run/
+Required structure:
+barameel-run/
+  screen02.html
+  screen03.html
+  assets/
+    screen02-how-it-works.png
+    screen03-runner-selection.png
+
+Link:
+Screen 02 — LET'S RUN -> ./screen03.html
+Screen 03 — BACK -> ./screen02.html
+
+Both screens use local PNG assets with relative paths to avoid blank pages caused by oversized embedded HTML/data URLs.
