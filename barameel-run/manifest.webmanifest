@@ -1,9 +1,9 @@
 {
-  "name":"BARAMEEL RUN",
-  "short_name":"BARAMEEL RUN",
-  "start_url":"./",
-  "display":"fullscreen",
-  "background_color":"#0E2A3D",
-  "theme_color":"#0E2A3D",
-  "orientation":"any"
+  "name": "BARAMEEL RUN",
+  "short_name": "BARAMEEL RUN",
+  "start_url": "./",
+  "display": "standalone",
+  "background_color": "#0b2633",
+  "theme_color": "#0b2633",
+  "orientation": "any"
 }
