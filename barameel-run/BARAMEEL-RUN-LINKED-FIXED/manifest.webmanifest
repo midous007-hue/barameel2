@@ -1,0 +1,8 @@
+{
+  "name": "BARAMEEL RUN",
+  "short_name": "BARAMEEL RUN",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#0b2633",
+  "theme_color": "#0b2633"
+}
