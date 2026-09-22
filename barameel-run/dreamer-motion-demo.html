@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>BARAMEEL RUN — Dreamer Motion Prototype</title>
+<style>
+:root{
+  --teal:#062b34; --cream:#f5e7c8; --red:#df2f22; --yellow:#ffbd2e;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:#071b22;color:var(--cream);font-family:Arial,Helvetica,sans-serif}
+body{display:grid;place-items:center;padding:18px}
+.app{
+  width:min(440px,100vw - 24px);
+  min-height:760px;
+  border:4px solid #e9d6a5;
+  border-radius:30px;
+  overflow:hidden;
+  position:relative;
+  background:
+    radial-gradient(circle at 50% 30%,rgba(44,103,111,.5),transparent 45%),
+    linear-gradient(145deg,#082d37,#041a21 70%);
+  box-shadow:0 18px 50px rgba(0,0,0,.5), inset 0 0 0 2px #5f4b2d;
+}
+.top{
+  padding:22px 22px 10px;
+  text-align:center;
+}
+.logo{font-weight:1000;font-style:italic;letter-spacing:-2px;font-size:40px;line-height:.8;text-shadow:4px 4px 0 #000}
+.logo span{display:block;color:#ff9f1b;font-size:48px}
+.sub{margin-top:18px;font-weight:900;letter-spacing:2px;color:#ffbd2e}
+.stage{
+  height:500px;
+  margin:0 18px 18px;
+  border:3px solid #e9d6a5;
+  border-radius:25px;
+  position:relative;
+  overflow:hidden;
+  display:grid;
+  place-items:end center;
+  background:
+    radial-gradient(circle at 50% 65%,rgba(255,189,46,.12),transparent 42%),
+    #06313a;
+}
+.stage:before,.stage:after{
+  content:"";position:absolute;inset:auto;pointer-events:none;border-radius:50%;
+}
+.stage:before{width:330px;height:330px;top:70px;background:radial-gradient(circle,rgba(255,189,46,.16),transparent 68%);filter:blur(8px)}
+.stage:after{width:180px;height:12px;bottom:28px;background:rgba(0,0,0,.45);filter:blur(10px)}
+.character{
+  width:82%; max-height:92%; object-fit:contain;
+  position:absolute;bottom:20px;left:50%;transform:translateX(-50%);
+  transform-origin:50% 88%;
+  filter:drop-shadow(0 16px 12px rgba(0,0,0,.45));
+  user-select:none;pointer-events:none;
+}
+#idle{opacity:1}
+#action{opacity:0}
+.stage.play #idle{
+  animation: idleToAction .82s cubic-bezier(.2,.9,.2,1) forwards;
+}
+.stage.play #action{
+  animation: actionBurst .82s cubic-bezier(.2,.9,.2,1) forwards;
+}
+.stage.play .pulse{
+  animation:pulse .72s ease-out forwards;
+}
+@keyframes idleToAction{
+  0%{opacity:1;transform:translateX(-50%) translateY(0) scale(1) rotate(0)}
+  28%{opacity:.85;transform:translateX(-50%) translateY(-12px) scale(1.045) rotate(-1deg)}
+  52%{opacity:0;transform:translateX(-50%) translateY(-22px) scale(1.08) rotate(1deg)}
+  100%{opacity:0}
+}
+@keyframes actionBurst{
+  0%{opacity:0;transform:translateX(-50%) translateY(25px) scale(.94) rotate(-2deg)}
+  35%{opacity:1;transform:translateX(-50%) translateY(-10px) scale(1.07) rotate(1.2deg)}
+  62%{opacity:1;transform:translateX(-50%) translateY(-4px) scale(1.035) rotate(-.6deg)}
+  82%{opacity:1;transform:translateX(-50%) translateY(0) scale(1.015) rotate(.2deg)}
+  100%{opacity:0;transform:translateX(-50%) translateY(0) scale(1)}
+}
+@keyframes pulse{
+  0%{opacity:0;transform:scale(.7)}
+  35%{opacity:.9;transform:scale(1)}
+  100%{opacity:0;transform:scale(1.25)}
+}
+.pulse{
+  position:absolute;width:270px;height:270px;border:3px solid var(--yellow);
+  border-radius:50%;bottom:100px;left:50%;transform:translateX(-50%) scale(.7);
+  opacity:0;box-shadow:0 0 35px rgba(255,189,46,.5),inset 0 0 35px rgba(255,189,46,.15);
+}
+.info{padding:0 24px 24px}
+.name{font-size:34px;font-weight:1000;font-style:italic;letter-spacing:1px}
+.trait{color:#ffbd2e;font-weight:900;margin:4px 0 14px}
+button{
+  width:100%;border:0;border-radius:18px;padding:16px 18px;
+  color:white;background:linear-gradient(#ef4a28,#c92218);
+  font-size:22px;font-weight:1000;font-style:italic;cursor:pointer;
+  box-shadow:0 5px 0 #7d160f,0 10px 25px rgba(0,0,0,.3);
+}
+button:active{transform:translateY(3px);box-shadow:0 2px 0 #7d160f}
+.hint{text-align:center;opacity:.7;font-size:12px;margin-top:12px}
+</style>
+</head>
+<body>
+<main class="app">
+  <header class="top">
+    <div class="logo">BARAMEEL<span>RUN</span></div>
+    <div class="sub">THE DREAMER · MOTION TEST</div>
+  </header>
+
+  <section class="stage" id="stage" aria-label="Dreamer character motion">
+    <div class="pulse"></div>
+    <img id="idle" class="character" src="./assets/dreamer-idle.png" alt="The Dreamer idle pose">
+    <img id="action" class="character" src="./assets/dreamer-action.png" alt="The Dreamer action pose">
+  </section>
+
+  <section class="info">
+    <div class="name">THE DREAMER</div>
+    <div class="trait">DREAMY ENTRY · STYLE BURST</div>
+    <button id="run">SELECT DREAMER →</button>
+    <div class="hint">Tap the button repeatedly to test the complete selection animation.</div>
+  </section>
+</main>
+
+<script>
+const stage = document.getElementById('stage');
+const btn = document.getElementById('run');
+
+let audioCtx;
+function sound(){
+  audioCtx ||= new (window.AudioContext || window.webkitAudioContext)();
+  const now = audioCtx.currentTime;
+  const o = audioCtx.createOscillator(), g = audioCtx.createGain();
+  o.type = 'triangle';
+  o.frequency.setValueAtTime(420,now);
+  o.frequency.exponentialRampToValueAtTime(760,now+.16);
+  g.gain.setValueAtTime(.0001,now);
+  g.gain.exponentialRampToValueAtTime(.08,now+.02);
+  g.gain.exponentialRampToValueAtTime(.0001,now+.22);
+  o.connect(g).connect(audioCtx.destination); o.start(now); o.stop(now+.24);
+}
+function play(){
+  stage.classList.remove('play');
+  void stage.offsetWidth;
+  stage.classList.add('play');
+  sound();
+}
+btn.addEventListener('click',play);
+stage.addEventListener('click',play);
+stage.addEventListener('animationend',()=>stage.classList.remove('play'));
+</script>
+</body>
+</html>

@@ -1,17 +1,24 @@
-BARAMEEL RUN — SCREEN 03 FINAL V3
+BARAMEEL RUN — THE DREAMER MOTION PROTOTYPE
 
-Upload ONLY this file into:
-barameel2/barameel-run/screen03.html
+UPLOAD:
+1. Upload dreamer-motion-demo.html directly into:
+   barameel-run/
+2. Upload the whole assets folder contents into:
+   barameel-run/assets/
+   - dreamer-idle.png
+   - dreamer-action.png
 
-This version is fully self-contained: the master artwork and all six runner artworks are embedded inside screen03.html. No assets folder is required, so there is no image-path/404 dependency.
+TEST URL:
+https://midous007-hue.github.io/barameel2/barameel-run/dreamer-motion-demo.html
 
-Behavior:
-- Same-screen runner selection.
-- Yellow selection frame hugs the portrait only (not the name strip).
-- Each runner swaps into the large lower-left character stage with a game-like cinematic animation.
-- Each runner has its own sound and animation.
-- Runner names are redrawn in a 70s display treatment.
-- Brona is the highest-rated runner: 5/5 in Speed, Jump, Coin Boost and Energy.
-- Back returns to screen02.html.
+WHAT THIS PROTOTYPE DOES:
+- Uses two clean character poses: IDLE + ACTION.
+- On selection/tap, CSS performs a game-style burst:
+  scale + vertical lift + rotation + pose swap + settle.
+- Adds a visual pulse and a short generated selection sound.
+- The same system can be reused for all six runners by replacing the two
+  character assets and assigning a unique animation/sound profile per runner.
 
-IMPORTANT: Replace the existing screen03.html with this file. Do not rename it to screen3.html or screen03-runner-selection.html.
+IMPORTANT:
+This is the motion prototype for THE DREAMER only. Once approved, duplicate
+the exact architecture for Rookie, Skater, Brona, Racer and Chiller.
