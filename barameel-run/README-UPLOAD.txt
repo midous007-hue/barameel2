@@ -1,17 +1,37 @@
-BARAMEEL RUN — SCREEN 03 HERO RUNNER UPDATE
+BARAMEEL RUN — SCREEN 03 FINAL UPLOAD
 
-Upload:
-1) Replace the existing barameel-run/screen03.html with this screen03.html.
-2) Keep the filename EXACTLY: screen03.html
-3) No assets folder is required; all six transparent runner artworks are embedded inside the HTML.
-4) After GitHub Pages finishes deploying, open:
+Use ONLY these two files for the new Screen 03:
+1) screen03.html
+2) screen03-master.png
+
+Exact live filename:
 https://midous007-hue.github.io/barameel2/barameel-run/screen03.html
 
-What this version changes:
-- The large lower hero area now uses the selected runner's transparent artwork, so Brona is not baked into the background behind other runners.
-- Every runner uses a different game-like entrance animation.
-- The gold selection frame stays around the selected top runner portrait only.
-- The stray horizontal line above runner names is removed.
-- Runner names keep the retro BARAMEEL treatment.
-- Brona remains the strongest runner at 5/5 for Speed, Jump, Coin Boost, and Energy.
-- Existing traits, special abilities, and tap sounds are preserved.
+IMPORTANT:
+- Delete the old Screen 03 files from barameel-run before uploading:
+  screen03-runner-selection.html
+  screen03-self-contained.html (if present)
+  screen03.html (old version, if present)
+- Do NOT delete screen02.html or screen04-run.html.
+- Upload the NEW screen03.html directly inside:
+  barameel-run/
+- Upload screen03-master.png inside:
+  barameel-run/
+  (It is the clean reference/replacement artwork. The HTML itself is self-contained and does not depend on this PNG to load.)
+
+WHAT IS INCLUDED:
+- Six clickable runners.
+- Selected runner gets the strong gold frame exactly around its card.
+- The large lower character changes to the selected runner.
+- Each runner has a different CSS game-style entrance/motion.
+- Each runner has different traits and special ability.
+- Brona is intentionally the highest overall: 5/5 in all four traits.
+- Distinct synthesized selection sound for each runner; no external audio files.
+- No page navigation when switching runners.
+- LET'S RUN stores the selected runner and then opens ./screen04-run.html.
+- BACK returns to the previous page.
+
+Screen 02 MUST point to:
+./screen03.html
+
+Do not use screen3.html or screen03-runner-selection.html.
