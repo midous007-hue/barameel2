@@ -1,0 +1,123 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>BARAMEEL RUN — Screen 04</title>
+<style>
+:root{
+  --teal:#0E2A3D; --mustard:#F0C830; --orange:#C2571A; --cream:#F5E9DC;
+  --red:#D94324; --ink:#081722; --green:#53A66D;
+}
+*{box-sizing:border-box}
+html,body{margin:0;width:100%;height:100%;background:#071722;color:var(--cream);font-family:Arial,Helvetica,sans-serif}
+body{display:flex;justify-content:center;overflow:hidden}
+.game{
+  width:min(100vw,560px);height:100dvh;min-height:620px;position:relative;overflow:hidden;
+  background:
+   radial-gradient(circle at 15% 18%,rgba(240,200,48,.22) 0 2px,transparent 3px),
+   radial-gradient(circle at 80% 32%,rgba(245,233,220,.14) 0 1px,transparent 2px),
+   linear-gradient(180deg,#0b3040 0%,#123e4a 58%,#0b2432 100%);
+}
+.game:before{
+ content:"";position:absolute;inset:0;opacity:.12;pointer-events:none;
+ background-image:repeating-linear-gradient(0deg,transparent 0 3px,#fff 4px,transparent 5px);
+ mix-blend-mode:screen;
+}
+.header{position:absolute;top:0;left:0;right:0;height:78px;padding:12px 14px;display:flex;align-items:center;gap:10px;z-index:5}
+.back{border:3px solid var(--ink);background:var(--red);color:var(--cream);border-radius:18px;padding:9px 13px;font-weight:900;font-size:14px;box-shadow:4px 4px 0 var(--mustard)}
+.brand{margin-left:auto;font-weight:1000;letter-spacing:1px;font-size:20px;text-shadow:3px 3px 0 var(--ink)}
+.stats{position:absolute;top:78px;left:14px;right:14px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;z-index:5}
+.stat{background:rgba(8,23,34,.88);border:2px solid var(--cream);border-radius:14px;padding:7px 8px;box-shadow:3px 3px 0 rgba(0,0,0,.35)}
+.stat b{display:block;font-size:17px}.stat span{font-size:10px;font-weight:900;letter-spacing:.8px;opacity:.8}
+.energy{grid-column:1/-1;display:flex;align-items:center;gap:8px;background:var(--cream);color:var(--ink);border:3px solid var(--ink);border-radius:14px;padding:7px 10px}
+.energy-label{font-weight:1000;font-size:11px;width:54px}.bar{height:13px;flex:1;border:2px solid var(--ink);border-radius:99px;overflow:hidden;background:#c7bfb5}
+.fill{height:100%;width:82%;background:var(--orange);transition:width .25s}
+.map{
+ position:absolute;left:12px;right:12px;top:176px;bottom:118px;border:4px solid var(--ink);border-radius:26px;overflow:hidden;
+ background:
+  linear-gradient(25deg,transparent 0 31%,rgba(240,200,48,.28) 31.3% 32%,transparent 32.3%),
+  linear-gradient(155deg,transparent 0 42%,rgba(194,87,26,.28) 42.2% 43%,transparent 43.3%),
+  repeating-linear-gradient(20deg,rgba(245,233,220,.16) 0 3px,transparent 3px 38px),
+  repeating-linear-gradient(110deg,rgba(245,233,220,.12) 0 2px,transparent 2px 46px),
+  #174554;
+}
+.sea{position:absolute;right:0;top:0;bottom:0;width:24%;background:linear-gradient(180deg,#0b6670,#0a4858);border-left:5px solid rgba(8,23,34,.65)}
+.sea:after{content:"ALEXANDRIA";position:absolute;top:45%;right:4px;writing-mode:vertical-rl;letter-spacing:3px;font-weight:1000;font-size:12px;opacity:.65}
+.road{position:absolute;height:22px;background:#d7c6ad;border:3px solid #263a3e;border-radius:50px;transform-origin:left center;opacity:.9}
+.r1{width:84%;left:-5%;top:27%;transform:rotate(18deg)} .r2{width:74%;left:8%;top:57%;transform:rotate(-9deg)} .r3{width:78%;left:2%;top:78%;transform:rotate(11deg)}
+.route{position:absolute;left:17%;top:76%;width:66%;height:4px;background:var(--mustard);transform:rotate(-18deg);box-shadow:0 0 0 2px var(--ink)}
+.point{position:absolute;width:34px;height:34px;border-radius:50%;border:4px solid var(--ink);background:var(--cream);color:var(--ink);display:grid;place-items:center;font-weight:1000;z-index:2}
+.p1{left:13%;top:69%}.p2{left:43%;top:58%}.p3{left:72%;top:43%}
+.point.done{background:var(--mustard)} .point.current{background:var(--red);color:var(--cream);box-shadow:0 0 0 6px rgba(217,67,36,.25)}
+.player{
+ position:absolute;left:39%;top:64%;width:56px;height:56px;border-radius:50%;background:var(--orange);border:4px solid var(--ink);
+ display:grid;place-items:center;font-size:25px;z-index:4;box-shadow:0 5px 0 var(--ink)
+}
+.player:after{content:"BRONA";position:absolute;top:58px;background:var(--ink);color:var(--cream);font-size:9px;padding:3px 6px;border-radius:6px;font-weight:1000}
+.pin{position:absolute;transform:translate(-50%,-100%);font-size:24px}
+.map-title{position:absolute;left:16px;top:12px;background:var(--cream);color:var(--ink);border:3px solid var(--ink);border-radius:12px;padding:7px 10px;font-weight:1000;font-size:14px;box-shadow:3px 3px 0 var(--mustard)}
+.hint{position:absolute;left:16px;right:16px;bottom:14px;background:rgba(8,23,34,.9);border:2px solid var(--cream);border-radius:13px;padding:8px;text-align:center;font-size:11px;font-weight:800}
+.bottom{
+ position:absolute;left:12px;right:12px;bottom:12px;height:94px;display:grid;grid-template-columns:1fr 1.25fr 1fr;gap:8px;z-index:6
+}
+.action{border:3px solid var(--ink);border-radius:17px;background:var(--cream);color:var(--ink);font-weight:1000;font-size:11px;padding:7px;box-shadow:4px 4px 0 var(--ink)}
+.action.main{background:var(--red);color:var(--cream);font-size:17px;letter-spacing:.5px}
+.action small{display:block;font-size:9px;margin-top:4px;opacity:.75}
+@media(max-height:720px){.map{top:170px;bottom:112px}.stats{top:74px}.header{height:72px}}
+</style>
+</head>
+<body>
+<main class="game">
+  <header class="header">
+    <button class="back" onclick="history.back()">← BACK</button>
+    <div class="brand">BARAMEEL RUN</div>
+  </header>
+
+  <section class="stats">
+    <div class="stat"><b>0</b><span>MARKS</span></div>
+    <div class="stat"><b>0.0 km</b><span>RUN</span></div>
+    <div class="stat"><b>01</b><span>SPOTS</span></div>
+    <div class="energy"><div class="energy-label">ENERGY</div><div class="bar"><div class="fill" id="energy"></div></div><b id="energyText">82%</b></div>
+  </section>
+
+  <section class="map" aria-label="Run map">
+    <div class="sea"></div>
+    <div class="road r1"></div><div class="road r2"></div><div class="road r3"></div>
+    <div class="map-title">RUN MODE • ALEXANDRIA</div>
+    <div class="route"></div>
+    <div class="point done p1">✓</div>
+    <div class="point current p2">2</div>
+    <div class="point p3">3</div>
+    <div class="player">✦</div>
+    <div class="pin" style="left:78%;top:35%">★</div>
+    <div class="hint">MOVE AROUND • REACH THE NEXT MARK • DISCOVER GOOD FOOD</div>
+  </section>
+
+  <nav class="bottom">
+    <button class="action" onclick="useEnergy()">MOVE<small>EXPLORE</small></button>
+    <button class="action main" onclick="collect()">COLLECT<small>+ MARKS</small></button>
+    <button class="action" onclick="showStatus()">STATUS<small>BRONA</small></button>
+  </nav>
+</main>
+
+<script>
+let energy=82, marks=0;
+function useEnergy(){
+  if(energy<=5) return;
+  energy=Math.max(0,energy-5);
+  update();
+}
+function collect(){
+  if(energy<3) return;
+  energy-=3; marks+=10; update();
+}
+function showStatus(){ alert("BRONA\\nSpeed: High\\nJump: Medium\\nCoin Boost: Medium\\nSpecial: Magnet Mood\\n\\nRunner abilities will be expanded in the next gameplay pass."); }
+function update(){
+ document.getElementById('energy').style.width=energy+'%';
+ document.getElementById('energyText').textContent=energy+'%';
+ document.querySelector('.stat b').textContent=marks;
+}
+</script>
+</body>
+</html>
